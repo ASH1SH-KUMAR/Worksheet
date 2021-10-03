@@ -20,7 +20,7 @@ let colId;
 
 for (let i = 0; i < allCells.length; i++) {
   allCells[i].addEventListener("click", function (e) {
-    // add active class
+  
     if (lastSelectedCell) {
       lastSelectedCell.classList.remove("active-cell");
       document
@@ -42,7 +42,6 @@ for (let i = 0; i < allCells.length; i++) {
     formulaInput.value = cellObject.formula;
 
 
-    // bold underline italic set hojata
     cellObject.fontStyle.bold
       ? document.querySelector(".bold").classList.add("active-font-style")
       : document.querySelector(".bold").classList.remove("active-font-style");
@@ -57,12 +56,10 @@ for (let i = 0; i < allCells.length; i++) {
           .querySelector(".underline")
           .classList.remove("active-font-style");
 
-    // alignment set hojae
-    // 1. remove already selected text align if exist
     if(lastSelectedCell){
       document.querySelector(".font-alignments .active-font-style").classList.remove("active-font-style");
     }
-    // 2. set active text align for the selected cell
+
    let textAlignment = cellObject.textAlign;
    document.querySelector(`.${textAlignment}`).classList.add("active-font-style");
   });
@@ -81,9 +78,9 @@ for (let i = 0; i < allCells.length; i++) {
       //formulaInput value = ""
       formulaInput.value = "";
     }
-    // db update , cellobject value if not same
+   
     cellObject.value = cellValue;
-    // updateChildrens
+
     updateChildrens(cellObject);
 
     if (cellObject.visited) {
@@ -109,27 +106,26 @@ for (let i = 0; i < allCells.length; i++) {
   });
 }
 
-// when someone leaves the formula input !!
 formulaInput.addEventListener("blur", function (e) {
   let formula = e.target.value;
-  // ( A1 + A2 )
+
   if (formula) {
     let { rowId, colId } = getRowIdColIdFromElement(lastSelectedCell);
     let cellObject = db[rowId][colId];
 
-    // if cellObject already had a formula
+ 
     if (cellObject.formula) {
       removeFormula(cellObject);
     }
 
     let computedValue = solveFormula(formula, cellObject);
-    // formula update
+  
     cellObject.formula = formula;
-    // cellObject value update
+
     cellObject.value = computedValue;
-    // ui update
+
     lastSelectedCell.textContent = computedValue;
-    // update childrens !!!
+
     updateChildrens(cellObject);
 
     if (cellObject.visited) {
