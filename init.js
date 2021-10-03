@@ -28,8 +28,8 @@ initCells();
 
 let sheetsDB = [];
 
-let db; // active-sheet db
-let visitedCells; // active sheet ke visited cells
+let db; 
+let visitedCells; 
 
 function initDB(){
     let newSheetDB = [];
