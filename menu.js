@@ -6,6 +6,18 @@ let left = document.querySelector(".left");
 let center = document.querySelector(".center");
 let right = document.querySelector(".right");
 
+let fontsize = document.querySelector(".font-text-size");
+
+let fonttype = document.querySelector(".font-type");
+
+fonttype.addEventListener("change",function(e){
+  lastSelectedCell.style.fontFamily = e.target.value;
+})
+
+fontsize.addEventListener("change",function(e){
+  lastSelectedCell.style.fontSize = e.target.value + "px";
+})
+
 bold.addEventListener("click", function (e) {
   setFontStyle("bold", bold);
 });
